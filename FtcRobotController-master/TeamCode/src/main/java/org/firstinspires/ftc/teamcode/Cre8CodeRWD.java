@@ -11,7 +11,7 @@ public class Cre8CodeRWD extends LinearOpMode
 
     private DcMotor backRight;
     private DcMotor backLeft;
-    private DcMotor arm;
+    //private DcMotor arm;
 
     /**
      * This function is executed when this OpMode is selected from the Driver Station.
@@ -20,7 +20,7 @@ public class Cre8CodeRWD extends LinearOpMode
     public void runOpMode() {
         backRight = hardwareMap.get(DcMotor.class, "backRight");
         backLeft = hardwareMap.get(DcMotor.class, "backLeft");
-        arm = hardwareMap.get(DcMotor.class, "arm");
+        //arm = hardwareMap.get(DcMotor.class, "arm");
         // Reverse one of the drive motors.
         // You will have to determine which motor to reverse for your robot.
         // In this example, the right motor was reversed so that positive
@@ -43,10 +43,10 @@ public class Cre8CodeRWD extends LinearOpMode
                 telemetry.addData("Left Pow", backLeft.getPower());
                 telemetry.addData("Right Pow", backLeft.getPower());
                 telemetry.update();
-                arm.setPower(-gamepad2.left_stick_y);
+                /*arm.setPower(-gamepad2.left_stick_y);
                 telemetry.addData("Left Pow", arm.getPower());
                 telemetry.addData("Right Pow", arm.getPower());
-                telemetry.update();
+                telemetry.update();*/
                 double y = -gamepad1.left_stick_y; // Remember, Y stick is reversed!
                 double rx = gamepad1.right_stick_x;
                 backLeft.setPower(y + rx);

@@ -22,31 +22,25 @@ public class Cre8CodeAWD extends LinearOpMode
      */
     @Override
     public void runOpMode() {
-        frontRight = hardwareMap.get(DcMotor.class, "frontRight");\
+        //mapping motors and servos
+        frontRight = hardwareMap.get(DcMotor.class, "frontRight");
         frontLeft = hardwareMap.get(DcMotor.class, "frontLeft");
         backRight = hardwareMap.get(DcMotor.class, "backRight");
         backLeft = hardwareMap.get(DcMotor.class, "backLeft");
         arm = hardwareMap.get(Servo.class, "arm");
+        //variables
         double clawClose = 1.0;
         double clawHalf = 0.5;
         double clawOpen = 0.0;
-        boolean isClawClosed = false;
-        double tgtPower = 0;
-        tgtPower = -this.gamepad1.left_stick_y;
-        double SENSITIVITY = 0;
-        double a = 1;
-        double b = 0.5;
-        double x = 0;
-        //arm = hardwareMap.get(DcMotor.class, "arm");
-        // Reverse one of the drive motors.
-        // You will have to determine which motor to reverse for your robot.
-        // In this example, the right motor was reversed so that positive
-        // applied power makes it move the robot in the forward direction.
+
+        //Motor directions
         frontRight.setDirection(DcMotorSimple.Direction.FORWARD);
         frontLeft.setDirection(DcMotorSimple.Direction.REVERSE);
         backRight.setDirection(DcMotorSimple.Direction.FORWARD);
         backLeft.setDirection(DcMotorSimple.Direction.REVERSE);
+
         waitForStart();
+
         if (opModeIsActive()) {
             // Put run blocks here.
             while (opModeIsActive()) {
@@ -55,36 +49,44 @@ public class Cre8CodeAWD extends LinearOpMode
                 // to +1 in its bottommost position. We negate this value so that
                 // the topmost position corresponds to maximum forward power.
 
-                backRight.setPower(-gamepad1.left_stick_y-SENSITIVITY);
+
+                /***********************************************
+                 * MAIN DRIVER CONTROLS   *** GAMEPAD1
+                 * *********************************************
+                 */
+                backRight.setPower(-gamepad1.left_stick_y);
                 telemetry.addData("Left Pow", backRight.getPower());
                 telemetry.addData("Right Pow", backRight.getPower());
                 telemetry.update();
-                backLeft.setPower(-gamepad1.left_stick_y-SENSITIVITY);
+                backLeft.setPower(-gamepad1.left_stick_y);
                 telemetry.addData("Left Pow", backLeft.getPower());
                 telemetry.addData("Right Pow", backLeft.getPower());
                 telemetry.update();
-                frontRight.setPower(-gamepad1.left_stick_y-SENSITIVITY);
+                frontRight.setPower(-gamepad1.left_stick_y);
                 telemetry.addData("Left Pow", frontRight.getPower());
                 telemetry.addData("Right Pow", frontRight.getPower());
                 telemetry.update();
-                frontLeft.setPower(-gamepad1.left_stick_y-SENSITIVITY);
+                frontLeft.setPower(-gamepad1.left_stick_y);
                 telemetry.addData("Left Pow", frontLeft.getPower());
                 telemetry.addData("Right Pow", frontLeft.getPower());
                 telemetry.update();
-                tgtPower = -this.gamepad1.left_stick_y;
-                // check to see if we need to move the servo.
-                if(gamepad1.y) {
+
+                /******************************************************
+                 * Secondary Driver ***** GAMEPAD2
+                 * ****************************************************
+                 */
+
+                if(gamepad2.y) {
                     // move to 0 degrees.
                     arm.setPosition(0);
-                } else if (gamepad1.x || gamepad1.b) {
+                } else if (gamepad2.x || gamepad2.b) {
                     // move to 90 degrees.
                     arm.setPosition(0.5);
-                } else if (gamepad1.a) {
+                } else if (gamepad2.a) {
                     // move to 180 degrees.
                     arm.setPosition(1);
                 }
                 telemetry.addData("Servo Position", arm.getPosition());
-                telemetry.addData("Target Power", tgtPower);
                 telemetry.update();
                 // check to see if we need to move the servo.
                 //open
@@ -122,10 +124,10 @@ public class Cre8CodeAWD extends LinearOpMode
                 telemetry.update();*/
                 double y = -gamepad1.left_stick_y; // Remember, Y stick is reversed!
                 double rx = gamepad1.right_stick_x;
-                backLeft.setPower(y + rx-SENSITIVITY);
-                backRight.setPower(y - rx-SENSITIVITY);
-                frontLeft.setPower(y + rx-SENSITIVITY);
-                frontRight.setPower(y - rx-SENSITIVITY);
+                backLeft.setPower(y + rx);
+                backRight.setPower(y - rx);
+                frontLeft.setPower(y + rx);
+                frontRight.setPower(y - rx);
                 /*double y = -gamepad1.left_stick_y; // Remember, Y stick is reversed!
                 double x = gamepad1.left_stick_x;
                 double rx = gamepad1.right_stick_x;
