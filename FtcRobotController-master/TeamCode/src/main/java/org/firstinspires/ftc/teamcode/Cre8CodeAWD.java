@@ -14,7 +14,8 @@ public class Cre8CodeAWD extends LinearOpMode
     private DcMotor frontLeft;
     private DcMotor backRight;
     private DcMotor backLeft;
-    private Servo arm;
+    private Servo bayServo;
+    private Servo droneLauncher;
 
 
     /**
@@ -27,11 +28,12 @@ public class Cre8CodeAWD extends LinearOpMode
         frontLeft = hardwareMap.get(DcMotor.class, "frontLeft");
         backRight = hardwareMap.get(DcMotor.class, "backRight");
         backLeft = hardwareMap.get(DcMotor.class, "backLeft");
-        arm = hardwareMap.get(Servo.class, "arm");
+        bayServo = hardwareMap.get(Servo.class, "bay");
+        droneLauncher = hardwareMap.get(Servo.class, "launcher");
         //variables
-        double clawClose = 1.0;
-        double clawHalf = 0.5;
-        double clawOpen = 0.0;
+        double bayOpen = 0.5;
+        double close = 0.0;
+        double launcherOpen = 1.0;
 
         //Motor directions
         frontRight.setDirection(DcMotorSimple.Direction.FORWARD);
@@ -48,6 +50,7 @@ public class Cre8CodeAWD extends LinearOpMode
                 // The Y axis of a joystick ranges from -1 in its topmost position
                 // to +1 in its bottommost position. We negate this value so that
                 // the topmost position corresponds to maximum forward power.
+
 
 
                 /***********************************************
@@ -75,8 +78,24 @@ public class Cre8CodeAWD extends LinearOpMode
                  * Secondary Driver ***** GAMEPAD2
                  * ****************************************************
                  */
+                //Bay Closed
+                if(gamepad2.a){
+                    bayServo.setPosition(close);
+                    sleep(100);
+                }
+                //Bay Open
+                if(gamepad2.b){
+                    bayServo.setPosition(bayOpen);
+                    sleep(100);
+                }
+                if(gamepad2.dpad_up){
+                    droneLauncher.setPosition(launcherOpen);
+                }
+                if(gamepad2.dpad_down){
+                    droneLauncher.setPosition(close);
+                }
 
-                if(gamepad2.y) {
+                /*if(gamepad2.y) {
                     // move to 0 degrees.
                     arm.setPosition(0);
                 } else if (gamepad2.x || gamepad2.b) {
@@ -87,41 +106,8 @@ public class Cre8CodeAWD extends LinearOpMode
                     arm.setPosition(1);
                 }
                 telemetry.addData("Servo Position", arm.getPosition());
-                telemetry.update();
-                // check to see if we need to move the servo.
-                //open
-                /*if(gamepad2.x){
-                    arm.setPosition(clawOpen);
-                    sleep(100);
-                }
-                //half closed
-                if(gamepad2.b){
-                    arm.setPosition(clawHalf);
-                    sleep(100);
-                }
-                //closed
-                if(gamepad2.a){
-                    arm.setPosition(clawClose);
-                     sleep(100);
-                }*/
-               /*if(gamepad1.y) {
-                    // move to 0 degrees.
-                    arm.setPosition(0);
-                    //arm.setDirection(Servo.Direction.FORWARD);
-               }
-               if (gamepad1.x || gamepad1.b) {
-                    // move to 90 degrees.
-                    arm.setPosition(0.5);
-                    //arm.setDirection(Servo.Direction.FORWARD);
-               }
-               if (gamepad1.a) {
-                    // move to 180 degrees.
-                    arm.setPosition(1);
-                    //arm.setDirection(Servo.Direction.FORWARD);
-               }
-                telemetry.addData("Servo Position", arm.getPosition());
-                telemetry.addData("Target Power", tgtPower);
                 telemetry.update();*/
+
                 double y = -gamepad1.left_stick_y; // Remember, Y stick is reversed!
                 double rx = gamepad1.right_stick_x;
                 backLeft.setPower(y + rx);
