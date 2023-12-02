@@ -14,15 +14,18 @@ public class Cre8CodeAWD extends LinearOpMode
     private DcMotor frontLeft;
     private DcMotor backRight;
     private DcMotor backLeft;
+    private DcMotor riggingActivate;
+    private DcMotor riggingDeploy;
     private Servo bayServo;
     private Servo droneLauncher;
+
 
 
     /**
      * This function is executed when this OpMode is selected from the Driver Station.
      */
     @Override
-    public void runOpMode() {
+    public void runOpMode() throws InterruptedException {
         //mapping motors and servos
         frontRight = hardwareMap.get(DcMotor.class, "frontRight");
         frontLeft = hardwareMap.get(DcMotor.class, "frontLeft");
@@ -88,13 +91,22 @@ public class Cre8CodeAWD extends LinearOpMode
                     bayServo.setPosition(bayOpen);
                     sleep(100);
                 }
+                //launch drone
                 if(gamepad2.dpad_up){
                     droneLauncher.setPosition(launcherOpen);
                 }
+                //reset drone servo
                 if(gamepad2.dpad_down){
                     droneLauncher.setPosition(close);
                 }
-
+                //rigging activate
+                if(gamepad2.right_bumper){
+                    activateRigging(1,2000);
+                }
+                //rigging deploy
+                if(gamepad2.left_bumper){
+                    deployRigging(1,2000);
+                }
                 /*if(gamepad2.y) {
                     // move to 0 degrees.
                     arm.setPosition(0);
@@ -123,6 +135,28 @@ public class Cre8CodeAWD extends LinearOpMode
                 backRight.setPower(y + x - rx);*/
             }
         }
+    }
+    public void rigging1(double power)
+    {
+        riggingActivate.setDirection(DcMotorSimple.Direction.FORWARD);
+        riggingActivate.setPower(power);
+    }
+
+    public void activateRigging (double power, long time) throws InterruptedException
+    {
+        rigging1(power);
+        Thread.sleep(time);
+    }
+    public void rigging2(double power)
+    {
+        riggingActivate.setDirection(DcMotorSimple.Direction.FORWARD);
+        riggingActivate.setPower(power);
+    }
+
+    public void deployRigging (double power, long time) throws InterruptedException
+    {
+        rigging2(power);
+        Thread.sleep(time);
     }
 }
 
