@@ -14,8 +14,8 @@ public class Cre8CodeAWD extends LinearOpMode
     private DcMotor frontLeft;
     private DcMotor backRight;
     private DcMotor backLeft;
-    private DcMotor riggingActivate;
-    private DcMotor riggingDeploy;
+    //private DcMotor riggingActivate;
+    //private DcMotor riggingDeploy;
     private Servo bayServo;
     private Servo droneLauncher;
 
@@ -31,8 +31,8 @@ public class Cre8CodeAWD extends LinearOpMode
         frontLeft = hardwareMap.get(DcMotor.class, "frontLeft");
         backRight = hardwareMap.get(DcMotor.class, "backRight");
         backLeft = hardwareMap.get(DcMotor.class, "backLeft");
-        riggingActivate =  hardwareMap.get(DcMotor.class, "activate");
-        riggingDeploy =  hardwareMap.get(DcMotor.class, "deploy");
+        //riggingActivate =  hardwareMap.get(DcMotor.class, "activate");
+        //riggingDeploy =  hardwareMap.get(DcMotor.class, "deploy");
         bayServo = hardwareMap.get(Servo.class, "bay");
         droneLauncher = hardwareMap.get(Servo.class, "launcher");
         //variables
