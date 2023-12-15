@@ -45,8 +45,8 @@ public class Cre8CodeAWD extends LinearOpMode
         frontLeft.setDirection(DcMotorSimple.Direction.REVERSE);
         backRight.setDirection(DcMotorSimple.Direction.FORWARD);
         backLeft.setDirection(DcMotorSimple.Direction.REVERSE);
-        riggingActivate.setDirection(DcMotorSimple.Direction.FORWARD);
-        riggingDeploy.setDirection(DcMotorSimple.Direction.FORWARD);
+        //riggingActivate.setDirection(DcMotorSimple.Direction.FORWARD);
+        //riggingDeploy.setDirection(DcMotorSimple.Direction.FORWARD);
         waitForStart();
 
         if (opModeIsActive()) {
