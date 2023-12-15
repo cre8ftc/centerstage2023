@@ -106,7 +106,7 @@ public class Cre8CodeAWD extends LinearOpMode
                 if(gamepad2.dpad_down){
                     droneLauncher.setPosition(close);
                 }
-				//rigging
+		//rigging
                 riggingActivate.setPower(-gamepad2.left_stick_y);
                 telemetry.addData("Left Pow", riggingActivate.getPower());
                 telemetry.addData("Right Pow", riggingActivate.getPower());
