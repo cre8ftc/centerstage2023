@@ -63,6 +63,7 @@ public class Cre8CodeAWD extends LinearOpMode
                  * Movement DRIVER CONTROLS   *** GAMEPAD1
                  * *********************************************
                  */
+                //forward and back
                 backRight.setPower(-gamepad1.left_stick_y);
                 telemetry.addData("Left Pow", backRight.getPower());
                 telemetry.addData("Right Pow", backRight.getPower());
@@ -79,7 +80,13 @@ public class Cre8CodeAWD extends LinearOpMode
                 telemetry.addData("Left Pow", frontLeft.getPower());
                 telemetry.addData("Right Pow", frontLeft.getPower());
                 telemetry.update();
-
+                //turning
+                double y = -gamepad1.left_stick_y; // Remember, Y stick is reversed!
+                double rx = gamepad1.right_stick_x;
+                backLeft.setPower(y + rx);
+                backRight.setPower(y - rx);
+                frontLeft.setPower(y + rx);
+                frontRight.setPower(y - rx);
                 /******************************************************
                  * Arm Driver ***** GAMEPAD2
                  * ****************************************************
@@ -102,40 +109,19 @@ public class Cre8CodeAWD extends LinearOpMode
                 if(gamepad2.dpad_down){
                     droneLauncher.setPosition(close);
                 }
-                riggingActivate.setPower(-gamepad2.left_stick_y);
+                //rigging
+                /*riggingActivate.setPower(-gamepad2.left_stick_y);
                 telemetry.addData("Left1 Pow", riggingActivate.getPower());
                 telemetry.addData("Right Pow", riggingActivate.getPower());
                 telemetry.update();
                 riggingDeploy.setPower(-gamepad2.right_stick_y);
                 telemetry.addData("Left Pow", riggingDeploy.getPower());
                 telemetry.addData("Right Pow", riggingDeploy.getPower());
-                telemetry.update();
-                /*if(gamepad2.y) {
-                    // move to 0 degrees.
-                    arm.setPosition(0);
-                } else if (gamepad2.x || gamepad2.b) {
-                    // move to 90 degrees.
-                    arm.setPosition(0.5);
-                } else if (gamepad2.a) {
-                    // move to 180 degrees.
-                    arm.setPosition(1);
-                }
-                telemetry.addData("Servo Position", arm.getPosition());
                 telemetry.update();*/
+               
 
-                double y = -gamepad1.left_stick_y; // Remember, Y stick is reversed!
-                double rx = gamepad1.right_stick_x;
-                backLeft.setPower(y + rx);
-                backRight.setPower(y - rx);
-                frontLeft.setPower(y + rx);
-                frontRight.setPower(y - rx);
-                /*double y = -gamepad1.left_stick_y; // Remember, Y stick is reversed!
-                double x = gamepad1.left_stick_x;
-                double rx = gamepad1.right_stick_x;
-                frontLeft.setPower(y + x + rx);
-                backLeft.setPower(y - x + rx);
-                frontRight.setPower(y - x - rx);
-                backRight.setPower(y + x - rx);*/
+                
+               
             }
         }
     }
