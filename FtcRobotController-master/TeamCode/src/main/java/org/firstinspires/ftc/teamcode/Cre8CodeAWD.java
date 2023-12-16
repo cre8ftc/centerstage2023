@@ -45,7 +45,7 @@ public class Cre8CodeAWD extends LinearOpMode
         frontLeft.setDirection(DcMotorSimple.Direction.REVERSE);
         backRight.setDirection(DcMotorSimple.Direction.FORWARD);
         backLeft.setDirection(DcMotorSimple.Direction.REVERSE);
-        //riggingActivate.setDirection(DcMotorSimple.Direction.FORWARD);
+       // riggingActivate.setDirection(DcMotorSimple.Direction.FORWARD);
         //riggingDeploy.setDirection(DcMotorSimple.Direction.FORWARD);
         waitForStart();
 
@@ -92,21 +92,21 @@ public class Cre8CodeAWD extends LinearOpMode
                  * ****************************************************
                  */
                 //Bay Closed
-                if(gamepad2.a){
+                if(gamepad2.dpad_down){
                     bayServo.setPosition(close);
                     sleep(100);
                 }
                 //Bay Open
-                if(gamepad2.b){
+                if(gamepad2.dpad_up){
                     bayServo.setPosition(bayOpen);
                     sleep(100);
                 }
                 //launch drone
-                if(gamepad2.dpad_up){
+                if(gamepad2.a){
                     droneLauncher.setPosition(launcherOpen);
                 }
                 //reset drone servo
-                if(gamepad2.dpad_down){
+                if(gamepad2.b){
                     droneLauncher.setPosition(close);
                 }
                 //rigging
@@ -118,12 +118,11 @@ public class Cre8CodeAWD extends LinearOpMode
                 telemetry.addData("Left Pow", riggingDeploy.getPower());
                 telemetry.addData("Right Pow", riggingDeploy.getPower());
                 telemetry.update();*/
-               
 
-                
-               
+
+
+
             }
         }
     }
 }
-
