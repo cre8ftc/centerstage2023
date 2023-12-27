@@ -22,7 +22,7 @@ public class Cre8AutoBlueA extends LinearOpMode
     @Override
     public void runOpMode() throws InterruptedException {
         frontRight = hardwareMap.get(DcMotor.class, "frontRight");
-        frontLeft = hardwareMap.get(DcMotor.class, "frontLeft");
+        frontLeft = hardwareMap.get(DcMotor.class, "animal");
         backRight = hardwareMap.get(DcMotor.class, "backRight");
         backLeft = hardwareMap.get(DcMotor.class, "backLeft");
         //arm = hardwareMap.get(DcMotor.class, "arm");
