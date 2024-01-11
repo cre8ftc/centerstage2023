@@ -14,10 +14,13 @@ public class Cre8CodeAWD extends LinearOpMode
     private DcMotor frontLeft;
     private DcMotor backRight;
     private DcMotor backLeft;
-    //private DcMotor riggingActivate;
-    //private DcMotor riggingDeploy;
-    private Servo bayServo;
+    private DcMotor riggingActivate;
+    private DcMotor riggingDeploy;
+    private DcMotor intake;
+    private DcMotor backdrop;
     private Servo droneLauncher;
+    private Servo enkulu;
+    private Servo amu;
 
 
 
@@ -28,13 +31,16 @@ public class Cre8CodeAWD extends LinearOpMode
     public void runOpMode() throws InterruptedException {
         //mapping motors and servos
         frontRight = hardwareMap.get(DcMotor.class, "frontRight");
-        frontLeft = hardwareMap.get(DcMotor.class, "frontLeft");
+        frontLeft = hardwareMap.get(DcMotor.class, "animal");
         backRight = hardwareMap.get(DcMotor.class, "backRight");
         backLeft = hardwareMap.get(DcMotor.class, "backLeft");
-        //riggingActivate =  hardwareMap.get(DcMotor.class, "activate");
-        //riggingDeploy =  hardwareMap.get(DcMotor.class, "deploy");
-        bayServo = hardwareMap.get(Servo.class, "bay");
+        riggingActivate =  hardwareMap.get(DcMotor.class, "activate");
+        riggingDeploy =  hardwareMap.get(DcMotor.class, "parjanya");
+        intake = hardwareMap.get(DcMotor.class, "intake");
+        backdrop = hardwareMap.get(DcMotor.class, "backdrop");
         droneLauncher = hardwareMap.get(Servo.class, "launcher");
+        enkulu = hardwareMap.get(Servo.class, "enkulu");
+        amu = hardwareMap.get(Servo.class, "amu");
         //variables
         double bayOpen = 0.5;
         double close = 0.0;
@@ -43,10 +49,10 @@ public class Cre8CodeAWD extends LinearOpMode
         //Motor directions
         frontRight.setDirection(DcMotorSimple.Direction.FORWARD);
         frontLeft.setDirection(DcMotorSimple.Direction.REVERSE);
-        backRight.setDirection(DcMotorSimple.Direction.FORWARD);
-        backLeft.setDirection(DcMotorSimple.Direction.REVERSE);
-       // riggingActivate.setDirection(DcMotorSimple.Direction.FORWARD);
-        //riggingDeploy.setDirection(DcMotorSimple.Direction.FORWARD);
+        backRight.setDirection(DcMotorSimple.Direction.REVERSE);
+        backLeft.setDirection(DcMotorSimple.Direction.FORWARD);
+        riggingActivate.setDirection(DcMotorSimple.Direction.FORWARD);
+        riggingDeploy.setDirection(DcMotorSimple.Direction.FORWARD);
         waitForStart();
 
         if (opModeIsActive()) {
@@ -63,7 +69,6 @@ public class Cre8CodeAWD extends LinearOpMode
                  * Movement DRIVER CONTROLS   *** GAMEPAD1
                  * *********************************************
                  */
-                //forward and back
                 backRight.setPower(-gamepad1.left_stick_y);
                 telemetry.addData("Left Pow", backRight.getPower());
                 telemetry.addData("Right Pow", backRight.getPower());
@@ -80,49 +85,56 @@ public class Cre8CodeAWD extends LinearOpMode
                 telemetry.addData("Left Pow", frontLeft.getPower());
                 telemetry.addData("Right Pow", frontLeft.getPower());
                 telemetry.update();
-                //turning
-                double y = -gamepad1.left_stick_y; // Remember, Y stick is reversed!
-                double rx = gamepad1.right_stick_x;
-                backLeft.setPower(y + rx);
-                backRight.setPower(y - rx);
-                frontLeft.setPower(y + rx);
-                frontRight.setPower(y - rx);
+
                 /******************************************************
                  * Arm Driver ***** GAMEPAD2
                  * ****************************************************
                  */
-                //Bay Closed
-                if(gamepad2.dpad_down){
-                    bayServo.setPosition(close);
-                    sleep(100);
-                }
-                //Bay Open
-                if(gamepad2.dpad_up){
-                    bayServo.setPosition(bayOpen);
-                    sleep(100);
-                }
-                //launch drone
+                //drone
                 if(gamepad2.a){
-                    droneLauncher.setPosition(launcherOpen);
+                    droneLauncher.setPosition(0.5);
                 }
-                //reset drone servo
                 if(gamepad2.b){
-                    droneLauncher.setPosition(close);
+                    droneLauncher.setPosition(0);
                 }
-                //rigging
-                /*riggingActivate.setPower(-gamepad2.left_stick_y);
+                //enkulu amus powerlifter
+                if(gamepad2.left_bumper){
+                    enkulu.setPosition(0.5);
+                    amu.setPosition(0.5);
+                }
+                if(gamepad2.dpad_down){
+                    enkulu.setPosition(0);
+                    amu.setPosition(0);
+                }
+                //Intake
+                intake.setPower(-gamepad2.right_trigger);
                 telemetry.addData("Left1 Pow", riggingActivate.getPower());
                 telemetry.addData("Right Pow", riggingActivate.getPower());
                 telemetry.update();
-                riggingDeploy.setPower(-gamepad2.right_stick_y);
+                //backdrop
+                backdrop.setPower(-gamepad2.right_stick_y);
+                telemetry.addData("Left1 Pow", riggingActivate.getPower());
+                telemetry.addData("Right Pow", riggingActivate.getPower());
+                telemetry.update();
+                //rigging
+                riggingActivate.setPower(-gamepad2.left_trigger);
+                telemetry.addData("Left1 Pow", riggingActivate.getPower());
+                telemetry.addData("Right Pow", riggingActivate.getPower());
+                telemetry.update();
+                riggingDeploy.setPower(-gamepad2.left_stick_y);
                 telemetry.addData("Left Pow", riggingDeploy.getPower());
                 telemetry.addData("Right Pow", riggingDeploy.getPower());
-                telemetry.update();*/
+                telemetry.update();
 
-
-
-
+                //Turns
+                double y = -gamepad1.left_stick_y; // Remember, Y stick is reversed!
+                double rx = gamepad1.right_stick_x;
+                backLeft.setPower(y - rx);
+                backRight.setPower(y + rx);
+                frontLeft.setPower(y - rx);
+                frontRight.setPower(y + rx);
             }
         }
     }
 }
+
