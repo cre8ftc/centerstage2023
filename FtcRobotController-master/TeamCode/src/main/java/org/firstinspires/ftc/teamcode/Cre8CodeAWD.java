@@ -14,17 +14,13 @@ public class Cre8CodeAWD extends LinearOpMode
     private DcMotor animal;
     private DcMotor backRight;
     private DcMotor backLeft;
-    /*private DcMotor parjanya;
+    private DcMotor parjanya;
     private DcMotor intakke;
     private DcMotor zewp;
     private DcMotor zow;
     private Servo ninjalauncher;
-    //private Servo enkulu;
-    //private Servo amu;
-    private Servo boxy;*/
-    
-
-
+    private Servo boxy;
+    private Servo intomotion;
 
     /**
      * This function is executed when this OpMode is selected from the Driver Station.
@@ -36,14 +32,13 @@ public class Cre8CodeAWD extends LinearOpMode
         animal = hardwareMap.get(DcMotor.class, "animal");
         backRight = hardwareMap.get(DcMotor.class, "backRight");
         backLeft = hardwareMap.get(DcMotor.class, "backLeft");
-        /*parjanya =  hardwareMap.get(DcMotor.class, "parjanya");
+        parjanya =  hardwareMap.get(DcMotor.class, "parjanya");
         intakke = hardwareMap.get(DcMotor.class, "intakke");
         zewp = hardwareMap.get(DcMotor.class, "zewp");
         zow = hardwareMap.get(DcMotor.class, "zow");
         ninjalauncher = hardwareMap.get(Servo.class, "ninja");
-        //enkulu = hardwareMap.get(Servo.class, "enkulu");
-        //amu = hardwareMap.get(Servo.class, "amu");
-        boxy = hardwareMap.get(Servo.class, "boxyboxbox");*/
+        intomotion = hardwareMap.get(Servo.class, "intoMotion");
+        boxy = hardwareMap.get(Servo.class, "boxyboxbox");
         //variables
 
         //Motor directions
@@ -51,10 +46,10 @@ public class Cre8CodeAWD extends LinearOpMode
         animal.setDirection(DcMotorSimple.Direction.REVERSE);
         backRight.setDirection(DcMotorSimple.Direction.REVERSE);
         backLeft.setDirection(DcMotorSimple.Direction.FORWARD);
-        /*zewp.setDirection(DcMotorSimple.Direction.FORWARD);
+        zewp.setDirection(DcMotorSimple.Direction.FORWARD);
         zow.setDirection(DcMotorSimple.Direction.FORWARD);
         parjanya.setDirection(DcMotorSimple.Direction.FORWARD);
-        intakke.setDirection(DcMotorSimple.Direction.FORWARD);*/
+        intakke.setDirection(DcMotorSimple.Direction.FORWARD);
 
         waitForStart();
 
@@ -89,7 +84,7 @@ public class Cre8CodeAWD extends LinearOpMode
                 telemetry.addData("Right Pow", animal.getPower());
                 telemetry.update();
                 //Turns
-                /*double y = -gamepad1.left_stick_y; // Remember, Y stick is reversed!
+                double y = -gamepad1.left_stick_y; // Remember, Y stick is reversed!
                 double rx = gamepad1.right_stick_x;
                 backLeft.setPower(y - rx);
                 backRight.setPower(y + rx);
@@ -101,10 +96,10 @@ public class Cre8CodeAWD extends LinearOpMode
                 telemetry.addData("Right Pow", intakke.getPower());
                 telemetry.update();
 
-                *//******************************************************
+                /******************************************************
                  * Arm Driver ***** GAMEPAD2
                  * ****************************************************
-                 *//*
+                 */
                 //drone
                 if(gamepad2.a){
                     ninjalauncher.setPosition(90);
@@ -112,15 +107,13 @@ public class Cre8CodeAWD extends LinearOpMode
                 if(gamepad2.b){
                     ninjalauncher.setPosition(0);
                 }
-                //enkulu amus powerlifter
-                *//*if(gamepad2.left_bumper){
-                    enkulu.setPosition(0.5);
-                    amu.setPosition(0.5);
+                //into motion
+                if(gamepad2.right_bumper){
+                    intomotion.setPosition(0);
                 }
-                if(gamepad2.dpad_down){
-                    enkulu.setPosition(0);
-                    amu.setPosition(0);
-                }*//*
+                if(gamepad2.left_bumper){
+                    intomotion.setPosition(50);
+                }
                 //box
                 if(gamepad2.x){
                     boxy.setPosition(0);
@@ -145,7 +138,7 @@ public class Cre8CodeAWD extends LinearOpMode
                 parjanya.setPower(gamepad2.right_trigger);
                 telemetry.addData("Left Pow", parjanya.getPower());
                 telemetry.addData("Right Pow", parjanya.getPower());
-                telemetry.update();*/
+                telemetry.update();
             }
         }
     }
