@@ -1,13 +1,12 @@
 package org.firstinspires.ftc.teamcode;
 
-import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 @TeleOp(name = "awdon")
-public class Cre8CodeAWD extends LinearOpMode
+public class awded extends LinearOpMode
 {
 
     private DcMotor frontRight;
@@ -101,18 +100,18 @@ public class Cre8CodeAWD extends LinearOpMode
                  * ****************************************************
                  */
                 //drone
-                if(gamepad2.a){
-                    ninjalauncher.setPosition(90);
-                }
                 if(gamepad2.b){
-                    ninjalauncher.setPosition(0);
+                    ninjalauncher.setPosition(180);
+                }
+                /* if(gamepad2.b){
+                    ninjalauncher.setPosition(0); */
                 }
                 //into motion
-                if(gamepad2.right_bumper){
-                    intomotion.setPosition(0);
+                if(gamepad2.dpad_up){
+                    intomotion.setPosition(90);
                 }
-                if(gamepad2.left_bumper){
-                    intomotion.setPosition(50);
+          /*      if(gamepad2.left_bumper){
+                    intomotion.setPosition(50); */
                 }
                 //box
                 if(gamepad2.x){
@@ -141,6 +140,4 @@ public class Cre8CodeAWD extends LinearOpMode
                 telemetry.update();
             }
         }
-    }
-}
 
